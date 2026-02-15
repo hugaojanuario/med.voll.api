@@ -1,5 +1,6 @@
 package med.voll.api.controllers;
 
+import jakarta.transaction.Transactional;
 import med.voll.api.domain.dto.doctor.DataCreatedDoctor;
 import med.voll.api.domain.entity.doctor.Doctor;
 import med.voll.api.repository.DoctorRepository;
@@ -17,6 +18,7 @@ public class DoctorController {
     private DoctorRepository doctorRepository;
 
     @PostMapping
+    @Transactional
     public void cadastrarDoctor(@RequestBody DataCreatedDoctor dataCreatedDoctor){
         doctorRepository.save(new Doctor(dataCreatedDoctor));
     }
