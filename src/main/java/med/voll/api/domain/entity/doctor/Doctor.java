@@ -24,6 +24,9 @@ public class Doctor {
     private String email;
 
     @Column(unique = true)
+    private String telefone;
+
+    @Column(unique = true)
     private String crm;
 
     @Enumerated(EnumType.STRING)
@@ -35,6 +38,7 @@ public class Doctor {
     public Doctor(DataCreatedDoctor dataDoctor) {
         this.nome = dataDoctor.nome();
         this.email = dataDoctor.email();
+        this.telefone = dataDoctor.telefone();
         this.crm = dataDoctor.crm();
         this.especialidade = dataDoctor.especialidade();
         this.endereco = new Endereco(dataDoctor.endereco());

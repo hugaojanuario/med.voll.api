@@ -1,8 +1,7 @@
 package med.voll.api.domain.dto.doctor;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import med.voll.api.domain.dto.endereco.EnderecoCadastroDTO;
 import med.voll.api.domain.entity.doctor.Especialidade;
 
@@ -16,12 +15,16 @@ public record DataCreatedDoctor(
         String email,
 
         @NotBlank
+        String telefone,
+
+        @NotBlank
+        @Pattern(regexp = "\\d{4,6}")
         String crm,
 
-        @NotBlank
+        @NotNull
         Especialidade especialidade,
 
-        @NotBlank
+        @Valid
         EnderecoCadastroDTO endereco
 ) {
 }

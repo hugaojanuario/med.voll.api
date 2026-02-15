@@ -3,6 +3,7 @@ package med.voll.api.domain.dto.endereco;
 import jakarta.validation.constraints.NotBlank;
 
 public record EnderecoCadastroDTO(
+
         @NotBlank
         String logradouro,
 
