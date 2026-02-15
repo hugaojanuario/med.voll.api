@@ -1,8 +1,10 @@
 package med.voll.api.domain.entity.doctor;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 import med.voll.api.domain.dto.doctor.DataCreatedDoctor;
+import med.voll.api.domain.dto.doctor.DataPutDoctors;
 import med.voll.api.domain.entity.endereco.Endereco;
 
 @Entity
@@ -30,12 +32,15 @@ public class Doctor {
     private String crm;
 
     @Enumerated(EnumType.STRING)
-    Especialidade especialidade;
+    private Especialidade especialidade;
 
     @Embedded
-    Endereco endereco;
+    private Endereco endereco;
+
+    private Boolean ativo;
 
     public Doctor(DataCreatedDoctor dataDoctor) {
+        this.ativo = true;
         this.nome = dataDoctor.nome();
         this.email = dataDoctor.email();
         this.telefone = dataDoctor.telefone();
@@ -43,4 +48,23 @@ public class Doctor {
         this.especialidade = dataDoctor.especialidade();
         this.endereco = new Endereco(dataDoctor.endereco());
     }
-}
+
+    public void updateDoctor(@Valid DataPutDoctors dataPutDoctors) {
+        if (dataPutDoctors.nome() != null){
+            this.nome = dataPutDoctors.nome();
+        }
+
+        if (dataPutDoctors.telefone() != null){
+            this.telefone = dataPutDoctors.telefone();
+        }
+
+        if (dataPutDoctors.enderecoCadastroDTO() != null){
+            this.endereco.updateInformations(dataPutDoctors.enderecoCadastroDTO());
+        }
+    }
+
+    public void delete() {
+            ativo = false;
+        }
+    }
+

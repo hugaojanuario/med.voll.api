@@ -4,7 +4,7 @@ import med.voll.api.domain.entity.doctor.Doctor;
 import med.voll.api.domain.entity.doctor.Especialidade;
 
 public record DataListingDoctors(
-
+        Long id,
         String nome,
         String email,
         String crm,
@@ -12,6 +12,7 @@ public record DataListingDoctors(
 
     public DataListingDoctors(Doctor doctor){
         this(
+                doctor.getId(),
                 doctor.getNome(),
                 doctor.getEmail(),
                 doctor.getCrm(),

@@ -25,4 +25,27 @@ public class Endereco {
         this.numero = dataEndereco.numero();
         this.complemento = dataEndereco.complemento();
     }
+
+    public void updateInformations(EnderecoCadastroDTO data) {
+        if (data.logradouro() != null){
+            this.logradouro = data.logradouro();
+        }
+
+        if (data.cep() != null){
+            this.cep = data.cep();
+        }
+
+        if (data.bairro() != null){
+            this.bairro = data.bairro();
+        }
+
+        if (data.numero() != null){
+            this.numero = data.numero();
+        }
+
+        if (data.complemento() != null){
+            this.complemento = data.complemento();
+        }
+
+    }
 }
