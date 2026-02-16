@@ -30,7 +30,6 @@ public class DoctorController {
     public ResponseEntity cadastrarDoctor(@RequestBody @Valid DataCreatedDoctor dataCreatedDoctor, UriComponentsBuilder uriBuilder){
         var doctor = new Doctor(dataCreatedDoctor);
         doctorRepository.save(doctor);
-
         var uri = uriBuilder.path("/doctor/{id}").buildAndExpand(doctor.getId()).toUri();
         return ResponseEntity.created(uri).body(new DataListingDoctors(doctor));
     }
@@ -38,7 +37,6 @@ public class DoctorController {
     @GetMapping
     public ResponseEntity <Page<DataListingDoctors>> listAll(@PageableDefault(size = 2)Pageable pageable){
         var find = doctorRepository.findAllByAtivoTrue(pageable).map(DataListingDoctors::new);
-
         return ResponseEntity.ok(find);
     }
 
