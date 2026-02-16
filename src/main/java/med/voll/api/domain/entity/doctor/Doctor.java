@@ -50,21 +50,20 @@ public class Doctor {
     }
 
     public void updateDoctor(@Valid DataPutDoctors dataPutDoctors) {
-        if (dataPutDoctors.nome() != null){
+        if (dataPutDoctors.nome() != null) {
             this.nome = dataPutDoctors.nome();
         }
 
-        if (dataPutDoctors.telefone() != null){
+        if (dataPutDoctors.telefone() != null) {
             this.telefone = dataPutDoctors.telefone();
         }
 
-        if (dataPutDoctors.enderecoCadastroDTO() != null){
+        if (dataPutDoctors.enderecoCadastroDTO() != null) {
             this.endereco.updateInformations(dataPutDoctors.enderecoCadastroDTO());
         }
     }
 
     public void delete() {
-            ativo = false;
-        }
+        ativo = false;
     }
-
+}

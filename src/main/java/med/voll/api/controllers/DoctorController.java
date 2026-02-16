@@ -7,6 +7,7 @@ import med.voll.api.domain.dto.doctor.DataListingDoctors;
 import med.voll.api.domain.dto.doctor.DataPutDoctors;
 import med.voll.api.domain.entity.doctor.Doctor;
 import med.voll.api.repository.DoctorRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,12 +42,17 @@ public class DoctorController {
         return ResponseEntity.ok(find);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity listById(@PathVariable Long id){
+        var doctor = doctorRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DataListingDoctors(doctor));
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity putDoctor (@RequestBody @Valid DataPutDoctors dataPutDoctors){
         var doctor = doctorRepository.getReferenceById(dataPutDoctors.id());
         doctor.updateDoctor(dataPutDoctors);
-
         return ResponseEntity.ok(new DataListingDoctors(doctor));
     }
 
@@ -55,7 +61,6 @@ public class DoctorController {
     public ResponseEntity deleteDoctor(@PathVariable Long id){
         var doctor = doctorRepository.getReferenceById(id);
         doctor.delete();
-
         return ResponseEntity.noContent().build();
     }
 
