@@ -28,7 +28,7 @@ public class PacientController {
 
     @GetMapping
     public Page<DataListingPacient> listAll(@PageableDefault(size = 2)Pageable pageable){
-        return pacientRepository.findAll(pageable)
+        return pacientRepository.findAllByAtivoTrue(pageable)
                 .map(DataListingPacient::new);
     }
 
@@ -37,6 +37,13 @@ public class PacientController {
     public void updatedPacient(@RequestBody @Valid DataUpdatePacient dataUP){
         var pacient = pacientRepository.getReferenceById(dataUP.id());
         pacient.updatePacient(dataUP);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void deleteByid(@PathVariable Long id){
+        var pacient = pacientRepository.getReferenceById(id);
+        pacient.delete();
     }
 
 }

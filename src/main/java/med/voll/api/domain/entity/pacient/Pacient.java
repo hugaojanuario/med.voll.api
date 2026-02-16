@@ -62,4 +62,8 @@ public class Pacient {
             this.endereco.updateInformations(dataUp.enderecoCadastroDTO());
         }
     }
+
+    public void delete(){
+        this.ativo = false;
+    }
 }
